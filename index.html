@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dasar Pemrograman Python – Semester 1</title>
+<style>
+:root{--bg:#f3f6fa;--c:#fff;--t:#122033;--m:#586a7e;--a:#2b5f9e;--y:#ffd43b;--b:#dbe3ec;--k:#0e1621;--kt:#d7e3f4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b121b;--c:#131d2a;--t:#e5edf6;--m:#94a5b8;--a:#7db3f0;--b:#253447;--k:#060a10}}
+:root[data-theme="dark"]{--bg:#0b121b;--c:#131d2a;--t:#e5edf6;--m:#94a5b8;--a:#7db3f0;--b:#253447;--k:#060a10}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.65 "Segoe UI",system-ui,sans-serif;min-height:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--c);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--c);border-bottom:1px solid var(--b)}
+#hd{display:block;font-size:11px;color:var(--m);padding:5px 12px 0;line-height:1.3}
+nav{background:var(--c);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;align-items:center}
+nav b{white-space:nowrap;margin-right:6px}
+nav a{flex:none;padding:5px 11px;border-radius:8px;color:var(--m);text-decoration:none;font-size:14px;border:1px solid transparent}
+nav a.on{background:var(--a);color:#fff}
+main{max-width:920px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin:.2em 0}
+h2{font-size:22px;margin:1.6em 0 .5em}
+h3{margin:.2em 0}
+.hero{background:var(--k);color:var(--kt);border-radius:14px;padding:26px 22px;border-left:8px solid var(--y)}
+.hero p{max-width:60ch;color:#a9bad0}
+.btn{display:inline-block;background:var(--y);color:#1a1a1a;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;margin:4px 6px 4px 0}
+.btn.g{background:transparent;color:inherit;border:1px solid currentColor}
+.card{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:16px 18px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.grid a{display:block;background:var(--c);border:1px solid var(--b);border-radius:12px;padding:12px 14px;color:var(--t);text-decoration:none}
+.grid a:hover{border-color:var(--a)}
+.grid small{color:var(--m)}
+li{margin:.3em 0}
+.tl{border-left:3px solid var(--a);padding-left:14px}
+.tl p{margin:.5em 0}.tl small{color:var(--m);display:block}
+.cont a{color:var(--a)}
+pre,textarea{font:14px/1.5 ui-monospace,Consolas,monospace;background:var(--k);color:var(--kt);border-radius:10px;border:0;padding:12px;width:100%;margin:6px 0;overflow-x:auto}
+textarea{resize:vertical;min-height:80px;display:block}
+#ed{min-height:210px}
+#out{min-height:70px;white-space:pre-wrap;color:#8ef0a8}
+.lb{font-size:13px;color:var(--m);margin-top:8px}
+.bar{display:flex;flex-wrap:wrap;gap:4px}
+.nv{display:flex;justify-content:space-between;gap:8px;margin-top:20px}
+.pill{display:inline-block;background:var(--y);color:#1a1a1a;border-radius:6px;padding:1px 9px;font-size:13px;font-weight:600}
+.err{color:#ff8c8c}
+code{background:var(--b);padding:1px 5px;border-radius:5px;font-size:.92em}
+.cs{border-left:5px solid var(--y)}
+.foto{width:100%;max-width:240px;aspect-ratio:4/5;object-fit:cover;border-radius:14px;border:3px solid var(--a);display:block;margin:0 0 12px}
+.sam{border-left:5px solid var(--a)}
+.sam p{margin:.6em 0}
+@media(max-width:600px){main{padding:14px 12px 32px}}
+</style>
+</head>
+<body>
+<header><small id="hd"></small><nav id="nav"></nav></header>
+<main id="app"></main>
+<script>
+const $=id=>document.getElementById(id);
+const P=[
+{t:"Pengenalan Dasar Pemrograman & Python",g:"Memahami algoritma dan bahasa pemrograman, lalu menjalankan program Python pertama.",
+th:`<p><b>Program</b> adalah kumpulan instruksi yang dijalankan komputer. <b>Algoritma</b> adalah langkah-langkah berurutan untuk menyelesaikan masalah. Python dipilih karena sintaksnya ringkas dan mudah dibaca, serta dipakai di web, data, dan AI.</p><ul><li>Pasang Python dari python.org, lalu pakai VS Code atau IDLE sebagai editor.</li><li>Jalankan file dengan perintah <code>python nama_file.py</code>.</li><li><code>print()</code> menampilkan teks ke layar.</li><li>Tanda <code>#</code> membuat komentar yang diabaikan komputer.</li></ul>`,
+c:`print("Halo, dunia!")\nprint("Saya belajar Python")\n# ini komentar`,i:"",
+k:"Tampilkan nama, NIM, dan program studi Anda dalam 3 baris.|Tulis algoritma 5 langkah untuk menyeduh teh, lalu terjemahkan sebagian ke print()."},
+{t:"Variabel & Tipe Data",g:"Menyimpan data dalam variabel dan membedakan tipe data dasar.",
+th:`<p>Variabel adalah wadah bernama untuk menyimpan nilai. Nama variabel boleh berisi huruf, angka, dan garis bawah, tidak boleh diawali angka, dan <b>huruf besar-kecil dibedakan</b>.</p><ul><li><code>int</code>: bilangan bulat, contoh <code>18</code></li><li><code>float</code>: bilangan desimal, contoh <code>170.5</code></li><li><code>str</code>: teks, contoh <code>"Budi"</code></li><li><code>bool</code>: <code>True</code> atau <code>False</code></li></ul>`,
+c:`nama = "Budi"\numur = 18\ntinggi = 170.5\naktif = True\nprint(nama, umur, tinggi, aktif)\numur = umur + 1\nprint("Tahun depan:", umur)`,i:"",
+k:"Simpan data diri dalam 4 variabel dengan tipe berbeda, lalu tampilkan.|Tukar isi dua variabel a dan b memakai variabel bantu."},
+{t:"Operator",g:"Menggunakan operator aritmatika, perbandingan, logika, dan penugasan.",
+th:`<ul><li><b>Aritmatika</b>: <code>+ - * / // % **</code> (<code>//</code> bagi bulat, <code>%</code> sisa bagi)</li><li><b>Perbandingan</b>: <code>== != &gt; &lt; &gt;= &lt;=</code>, hasilnya True/False</li><li><b>Logika</b>: <code>and</code>, <code>or</code>, <code>not</code></li><li><b>Penugasan</b>: <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code></li></ul><p>Urutan prioritas: kurung, pangkat, kali/bagi, tambah/kurang.</p>`,
+c:`a = 17\nb = 5\nprint("Bagi:", a / b)\nprint("Bagi bulat:", a // b)\nprint("Sisa:", a % b)\nprint("Pangkat:", a ** 2)\nprint(a > b and b > 10)\na += 3\nprint(a)`,i:"",
+k:"Hitung luas dan keliling lingkaran dengan jari-jari 7 (pi = 3.14).|Cek apakah sebuah bilangan genap memakai operator %."},
+{t:"Input, Output & Konversi Tipe",g:"Membaca data dari pengguna dan menampilkannya dengan format rapi.",
+th:`<p><code>input()</code> selalu menghasilkan <b>teks</b>. Ubah ke angka dengan <code>int()</code> atau <code>float()</code> sebelum dihitung. Gunakan <b>f-string</b> (<code>f"..."</code>) untuk menyisipkan variabel ke dalam teks.</p><ul><li><code>{total:,}</code> memberi pemisah ribuan</li><li><code>{rata:.2f}</code> membulatkan 2 angka desimal</li></ul><p>Pada simulator, isi kotak <i>Input</i>, satu nilai per baris.</p>`,
+c:`nama = input("Nama: ")\nharga = int(input("Harga: "))\njumlah = int(input("Jumlah: "))\ntotal = harga * jumlah\nprint(f"Halo {nama}, total bayar Rp{total:,}")`,i:"Sari\n15000\n3",
+k:"Hitung rata-rata 3 nilai yang diinput pengguna.|Ubah suhu Celsius ke Fahrenheit (F = C * 9 / 5 + 32)."},
+{t:"Percabangan (if, elif, else)",g:"Membuat program yang mengambil keputusan berdasarkan kondisi.",
+th:`<p>Percabangan menjalankan blok kode hanya jika kondisinya benar. Python memakai <b>indentasi (4 spasi)</b> untuk menandai isi blok, dan baris kondisi diakhiri tanda titik dua <code>:</code>.</p><ul><li><code>if</code>: kondisi pertama</li><li><code>elif</code>: kondisi lain, boleh lebih dari satu</li><li><code>else</code>: jika semua kondisi salah</li></ul>`,
+c:`nilai = int(input("Nilai: "))\nif nilai >= 85:\n    print("A")\nelif nilai >= 70:\n    print("B")\nelif nilai >= 55:\n    print("C")\nelse:\n    print("Perlu remedial")`,i:"78",
+k:"Tentukan apakah suatu tahun adalah tahun kabisat.|Buat login sederhana: cek username dan password."},
+{t:"Perulangan for & range()",g:"Mengulang instruksi dengan jumlah pengulangan yang diketahui.",
+th:`<p><code>for</code> mengulang blok kode untuk setiap nilai dalam urutan. <code>range(awal, akhir, langkah)</code> membuat urutan angka; nilai <b>akhir tidak ikut</b>.</p><ul><li><code>range(5)</code> menghasilkan 0,1,2,3,4</li><li><code>range(1, 6)</code> menghasilkan 1 sampai 5</li><li>Perulangan di dalam perulangan (nested) dipakai untuk pola dan tabel.</li></ul>`,
+c:`for i in range(1, 6):\n    print("Perulangan ke", i)\ntotal = 0\nfor n in range(1, 11):\n    total += n\nprint("Jumlah 1-10 =", total)`,i:"",
+k:"Cetak tabel perkalian 7 dari 1 sampai 10.|Cetak segitiga bintang 5 baris dengan print(\"*\" * i)."},
+{t:"Perulangan while, break & continue",g:"Mengulang selama kondisi benar dan mengendalikan alur perulangan.",
+th:`<p><code>while</code> mengulang selama kondisinya True, cocok bila jumlah pengulangan tidak diketahui. Pastikan ada perubahan yang akhirnya membuat kondisi salah, jika tidak program akan berulang tanpa henti.</p><ul><li><code>break</code>: keluar dari perulangan</li><li><code>continue</code>: lompat ke putaran berikutnya</li></ul>`,
+c:`saldo = 100\nwhile saldo > 0:\n    print("Saldo:", saldo)\n    saldo -= 30\nprint("Habis")\nfor i in range(1, 8):\n    if i == 5:\n        break\n    print(i)`,i:"",
+k:"Buat permainan tebak angka sampai benar.|Hitung jumlah digit dari sebuah bilangan memakai while."},
+{t:"String",g:"Mengolah teks: indeks, potongan, dan method string.",
+th:`<p>String adalah urutan karakter. Indeks dimulai dari <b>0</b>. Potongan <code>teks[0:5]</code> mengambil indeks 0 sampai 4.</p><ul><li><code>len(s)</code>: panjang teks</li><li><code>.upper()</code>, <code>.lower()</code>, <code>.strip()</code>, <code>.replace(a, b)</code></li><li><code>"kata" in teks</code>: cek isi teks</li></ul>`,
+c:`kata = "Pemrograman Python"\nprint(len(kata))\nprint(kata.upper())\nprint(kata[0], kata[3])\nprint(kata[0:5])\nprint(kata.replace("Python", "Dasar"))\nprint("Python" in kata)`,i:"",
+k:"Hitung jumlah huruf vokal dalam sebuah kalimat.|Cek apakah sebuah kata palindrom memakai perulangan."},
+{t:"List",g:"Menyimpan banyak data dalam satu variabel dan mengolahnya.",
+th:`<p>List adalah kumpulan nilai berurutan yang <b>dapat diubah</b>, ditulis dalam kurung siku.</p><ul><li><code>daftar[0]</code>: akses elemen pertama</li><li><code>.append(x)</code>: tambah di akhir; <code>.pop()</code>: ambil elemen terakhir</li><li><code>len()</code>, <code>sum()</code>, <code>max()</code>, <code>min()</code></li><li>Gunakan <code>for item in daftar</code> untuk menelusuri semua elemen.</li></ul>`,
+c:`buah = ["apel", "jeruk", "mangga"]\nbuah.append("pisang")\nprint(buah)\nprint(len(buah), buah[1])\nfor b in buah:\n    print("-", b)\nnilai = [80, 75, 90]\nprint("Rata-rata:", sum(nilai) / len(nilai))`,i:"",
+k:"Cari nilai tertinggi dan terendah dari sebuah list.|Buat daftar belanja dari input pengguna lalu tampilkan."},
+{t:"Tuple & Dictionary",g:"Memilih struktur data yang tepat: tuple dan dictionary.",
+th:`<p><b>Tuple</b> seperti list tetapi tidak bisa diubah: <code>titik = (3, 4)</code>. <b>Dictionary</b> menyimpan pasangan <i>kunci: nilai</i>, sehingga data diakses lewat nama kuncinya.</p><ul><li><code>mhs["nama"]</code>: ambil nilai</li><li><code>mhs["kota"] = "Jambi"</code>: tambah atau ubah data</li><li><code>for k in mhs</code>: telusuri semua kunci</li></ul>`,
+c:`mhs = {"nama": "Dina", "umur": 18, "prodi": "TI"}\nprint(mhs["nama"])\nmhs["umur"] = 19\nmhs["kota"] = "Jambi"\nfor k in mhs:\n    print(k, "=", mhs[k])\nprint(len(mhs))`,i:"",
+k:"Simpan data 3 mahasiswa dalam list berisi dictionary.|Hitung frekuensi tiap huruf dalam sebuah kata."},
+{t:"Fungsi",g:"Membuat kode yang dapat dipakai ulang dengan fungsi.",
+th:`<p>Fungsi adalah blok kode bernama yang dibuat dengan <code>def</code>. Fungsi membuat program lebih rapi dan tidak berulang.</p><ul><li><b>Parameter</b>: data masukan fungsi</li><li><code>return</code>: mengembalikan hasil ke pemanggil</li><li><b>Nilai default</b>: <code>def sapa(nama, salam="Halo")</code></li></ul>`,
+c:`def luas_persegi(sisi):\n    return sisi * sisi\n\ndef sapa(nama, salam="Halo"):\n    print(f"{salam}, {nama}!")\n\nprint(luas_persegi(5))\nsapa("Andi")\nsapa("Sari", "Selamat pagi")`,i:"",
+k:"Buat fungsi untuk mengecek bilangan prima.|Buat fungsi konversi nilai angka ke huruf mutu."},
+{t:"Modul & Library",g:"Memanfaatkan modul bawaan Python dan membuat modul sendiri.",
+th:`<p>Modul adalah file Python berisi fungsi siap pakai. Panggil dengan <code>import</code>.</p><ul><li><code>math</code>: <code>sqrt()</code>, <code>pi</code>, <code>floor()</code></li><li><code>random</code>: <code>randint(a, b)</code> bilangan acak</li><li>Modul sendiri: simpan fungsi di <code>alat.py</code>, lalu <code>import alat</code>.</li></ul>`,
+c:`import math\nimport random\nprint(math.sqrt(144))\nprint(math.pi)\nangka = random.randint(1, 6)\nprint("Dadu:", angka)`,i:"",
+k:"Hitung luas lingkaran dengan math.pi.|Buat undian nomor pemenang dengan random."},
+{t:"Penanganan Error & File",g:"Menangani kesalahan program dan membaca atau menulis file.",
+th:`<p><code>try ... except</code> mencegah program berhenti saat terjadi error, misalnya pengguna mengetik huruf saat diminta angka.</p><p>Membaca dan menulis file (dijalankan di komputer Anda):</p><pre>with open("data.txt", "w") as f:\n    f.write("Halo file")\nwith open("data.txt") as f:\n    print(f.read())</pre><p>Mode: <code>r</code> baca, <code>w</code> tulis (menimpa), <code>a</code> tambah.</p>`,
+c:`try:\n    angka = int(input("Masukkan angka: "))\n    print("Kuadrat:", angka ** 2)\nexcept ValueError:\n    print("Input harus berupa angka!")`,i:"abc",
+k:"Buat kalkulator yang tidak berhenti saat input salah.|Simpan daftar nama ke file teks lalu baca kembali."},
+{t:"Mini Proyek & Review",g:"Menggabungkan seluruh materi menjadi satu program utuh.",
+th:`<p>Rangkum konsep dari pertemuan 1 sampai 13: variabel, operator, percabangan, perulangan, struktur data, fungsi, dan error handling. Pilih satu ide proyek:</p><ul><li>Kalkulator nilai mahasiswa</li><li>Aplikasi kasir sederhana</li><li>Permainan tebak angka</li><li>Pencatat data mahasiswa</li></ul><p>Presentasikan alur program dan demo hasilnya.</p>`,
+c:`nilai = []\nfor i in range(3):\n    nilai.append(int(input("Nilai: ")))\nrata = sum(nilai) / len(nilai)\nprint(f"Rata-rata: {rata:.2f}")\nif rata >= 70:\n    print("Lulus")\nelse:\n    print("Tidak lulus")`,i:"80\n65\n90",
+k:"Kembangkan contoh di atas menjadi program nilai dengan huruf mutu.|Presentasikan proyek pilihan Anda."}
+];
+const X=[
+{d:`<h3>A. Pengenalan Pemrograman</h3><p><b>Program</b> adalah kumpulan instruksi tertulis yang dijalankan komputer untuk menyelesaikan tugas tertentu. <b>Pemrograman</b> adalah proses merancang, menulis, menguji, dan memperbaiki program tersebut. Komputer hanya mengerjakan apa yang diperintahkan, secara tepat dan berurutan, sehingga instruksi harus jelas dan tidak ambigu.</p><p><b>Algoritma</b> adalah langkah-langkah logis dan terbatas untuk menyelesaikan masalah. Ciri algoritma yang baik: ada masukan (input), ada keluaran (output), setiap langkah jelas, jumlah langkah terbatas, dan efektif. Algoritma dapat disajikan sebagai kalimat, <i>pseudocode</i>, atau <i>flowchart</i>.</p><p><b>Siklus pengembangan program:</b></p><ol><li><b>Analisis</b>: pahami masalah, data masukan, dan hasil yang diharapkan.</li><li><b>Perancangan</b>: susun algoritma atau flowchart.</li><li><b>Implementasi</b>: tulis kode dalam bahasa pemrograman.</li><li><b>Pengujian</b>: jalankan dengan berbagai data dan cari kesalahan.</li><li><b>Perbaikan dan perawatan</b>: perbaiki bug, tambahkan fitur.</li></ol><p><b>Jenis kesalahan:</b> <i>syntax error</i> (aturan penulisan dilanggar, program tidak jalan), <i>runtime error</i> (error saat program berjalan, misalnya pembagian dengan nol), dan <i>logic error</i> (program jalan tetapi hasil salah).</p><h3>B. Bahasa Pemrograman</h3><p>Bahasa pemrograman adalah bahasa buatan dengan aturan penulisan (sintaks) untuk memberi perintah kepada komputer. Komputer hanya memahami kode biner (0 dan 1), sehingga kode yang kita tulis harus diterjemahkan.</p><ul><li><b>Bahasa mesin</b>: kode biner langsung; cepat tetapi sangat sulit ditulis.</li><li><b>Bahasa assembly</b>: memakai singkatan seperti <code>MOV</code> dan <code>ADD</code>; dekat dengan perangkat keras.</li><li><b>Bahasa tingkat tinggi</b>: mirip bahasa manusia, misalnya Python, Java, C++, JavaScript, PHP.</li></ul><p><b>Penerjemah kode:</b> <b>compiler</b> menerjemahkan seluruh program sekaligus menjadi file eksekusi (contoh: C, C++), sedangkan <b>interpreter</b> menerjemahkan dan menjalankan baris demi baris (contoh: Python, JavaScript). Kompilasi biasanya lebih cepat saat dijalankan, interpretasi lebih mudah diuji dan diperbaiki.</p><p><b>Paradigma pemrograman:</b> prosedural (urutan perintah dan fungsi), berorientasi objek (class dan objek), dan fungsional (fungsi sebagai unit utama). Python mendukung ketiganya.</p><table style="width:100%;border-collapse:collapse;font-size:14px"><tr style="text-align:left"><th>Bahasa</th><th>Bidang utama</th></tr><tr><td>Python</td><td>Data, AI, web, otomasi, pendidikan</td></tr><tr><td>JavaScript</td><td>Web (tampilan dan server)</td></tr><tr><td>Java / Kotlin</td><td>Aplikasi enterprise, Android</td></tr><tr><td>C / C++</td><td>Sistem, game, perangkat keras</td></tr><tr><td>PHP</td><td>Situs web sisi server</td></tr><tr><td>SQL</td><td>Pengelolaan basis data</td></tr></table><h3>C. Pengenalan Python</h3><p>Python diciptakan oleh <b>Guido van Rossum</b> dan dirilis pertama kali tahun <b>1991</b>. Namanya berasal dari grup komedi Monty Python, bukan dari ular. Saat ini Python dikelola oleh Python Software Foundation, dan versi yang dipakai adalah <b>Python 3</b> (Python 2 sudah tidak didukung).</p><p><b>Filosofi Python</b> (The Zen of Python): sederhana lebih baik daripada rumit, keterbacaan itu penting. Python memakai <b>indentasi</b> sebagai penanda blok kode, bukan kurung kurawal, sehingga kode cenderung rapi.</p><p><b>Kelebihan:</b></p><ul><li>Sintaks ringkas dan mudah dipelajari pemula.</li><li>Gratis, sumber terbuka, dan lintas platform (Windows, macOS, Linux).</li><li>Pustaka sangat lengkap: NumPy, Pandas, Matplotlib, Flask, Django, TensorFlow.</li><li>Komunitas besar sehingga referensi dan bantuan mudah dicari.</li></ul><p><b>Keterbatasan:</b> lebih lambat dibanding bahasa terkompilasi seperti C++, dan kurang ideal untuk aplikasi seluler asli atau pekerjaan yang sangat menuntut kecepatan.</p><p><b>Penerapan:</b> analisis data, kecerdasan buatan, pengembangan web, otomasi tugas, ilmu pengetahuan, dan pengajaran pemrograman.</p><p><b>Cara menjalankan Python:</b> (1) mode interaktif (REPL) untuk mencoba satu baris; (2) mode skrip, yaitu menyimpan kode di file <code>.py</code> lalu menjalankannya dengan <code>python nama_file.py</code>; (3) editor seperti IDLE, VS Code, atau Google Colab.</p>`,
+e:`<p><b>Contoh 1 - Algoritma menyeduh teh</b> (kalimat): 1) rebus air, 2) masukkan teh ke gelas, 3) tuang air panas, 4) tunggu 3 menit, 5) tambahkan gula.</p><p><b>Contoh 2 - Pseudocode</b> menghitung luas persegi panjang:</p><pre>MULAI\n  BACA panjang, lebar\n  luas = panjang x lebar\n  TULIS luas\nSELESAI</pre><p><b>Contoh 3 - Program Python pertama:</b></p><pre># program pertama\nprint("Halo, dunia!")\nprint("Nama saya Budi")\nprint(2 + 3)</pre><p>Keluaran: tiga baris, yaitu dua teks lalu angka 5. Teks ditulis dengan tanda kutip, angka dihitung langsung.</p><p><b>Contoh 4 - Kesalahan umum:</b></p><pre>print("Halo)      # syntax error: kutip tidak ditutup\nprint(10 / 0)    # runtime error: bagi nol\nprint("Luas:", 5 + 5)  # logic error jika maksud kita 5 x 5</pre>`,
+s:`<p><b>Studi kasus: struk otomatis warung.</b> Ibu Rina memiliki warung dan ingin struk belanja tercetak otomatis berisi nama toko, nama barang, dan total.</p><ol><li><b>Analisis</b>: masukan = nama barang, harga, jumlah; keluaran = struk dan total.</li><li><b>Perancangan</b>: pseudocode (baca barang, hitung harga x jumlah, tulis struk).</li><li><b>Implementasi</b> awal dengan <code>print()</code>:</li></ol><pre>print("=== WARUNG BU RINA ===")\nprint("Beras 2 kg  : Rp 30000")\nprint("Minyak 1 L  : Rp 18000")\nprint("TOTAL       : Rp", 30000 + 18000)</pre><ol start="4"><li><b>Pengujian</b>: bandingkan total dengan hitungan manual (48000).</li><li><b>Perbaikan</b>: pada pertemuan berikutnya data dibuat dinamis memakai variabel dan input.</li></ol><p><b>Pelajaran:</b> kode ditulis setelah masalah dipahami dan algoritma jelas. Mulai dari versi sederhana yang berjalan, lalu kembangkan bertahap.</p><p><b>Diskusi:</b> mengapa Python cocok untuk kasus ini dibanding bahasa assembly?</p>`},
+{d:`<p>Variabel menunjuk ke sebuah nilai di memori. Python memakai <b>dynamic typing</b>: tipe ditentukan otomatis dari nilainya dan dapat berubah saat variabel diisi ulang. Gunakan nama deskriptif bergaya <code>snake_case</code>, misalnya <code>total_belanja</code>.</p><p>Tipe berbeda tidak bisa digabung langsung: <code>"Umur: " + 18</code> menghasilkan error, sehingga angka harus diubah dulu dengan <code>str()</code>. Pilih tipe berdasarkan <i>fungsi</i> data, bukan tampilannya.</p>`,
+e:`<pre>harga = 15000      # int\njumlah = 3         # int\ntotal = harga * jumlah\nnama_barang = "Pulpen"   # str\nprint(nama_barang, total)</pre>`,
+s:`<p><b>Data mahasiswa di sistem akademik.</b> NIM disimpan sebagai <code>str</code> (bukan <code>int</code>) karena tidak dihitung dan bisa berawalan nol; IPK sebagai <code>float</code>; status aktif sebagai <code>bool</code>; nama sebagai <code>str</code>.</p><p><b>Pelajaran:</b> tipe data yang tepat mencegah kesalahan dan memudahkan pemrosesan.</p>`},
+{d:`<p>Operator aritmatika <code>/</code> selalu menghasilkan <code>float</code>, sedangkan <code>//</code> membulatkan ke bawah dan <code>%</code> memberi sisa bagi. Operator perbandingan menghasilkan <code>True/False</code> dan dapat digabung dengan <code>and</code>, <code>or</code>, <code>not</code>.</p><p>Pada <code>and</code>, jika bagian kiri sudah False maka bagian kanan tidak dievaluasi (<i>short-circuit</i>). Pakai tanda kurung agar urutan hitungan jelas dibaca.</p>`,
+e:`<pre>print(17 % 5)        # 2, sisa bagi\nn = 8\nprint(n % 2 == 0)    # True, n genap\nprint(7 // 2, 7 / 2) # 3 3.5</pre>`,
+s:`<p><b>Diskon toko.</b> Diskon 10% berlaku jika belanja minimal Rp100.000 <i>dan</i> pembeli anggota. Kondisi: <code>belanja &gt;= 100000 and anggota</code>. Bayar = <code>belanja - belanja * 0.1</code>.</p><p><b>Pelajaran:</b> aturan bisnis diterjemahkan langsung menjadi ekspresi logika; uji dengan nilai batas (tepat 100000).</p>`},
+{d:`<p>Setiap program mengikuti pola <b>IPO: Input → Proses → Output</b>. <code>input()</code> selalu mengembalikan teks, jadi nilai angka harus dikonversi dengan <code>int()</code> atau <code>float()</code>. Jika pengguna mengetik huruf, muncul <code>ValueError</code> (ditangani di pertemuan 13).</p><p>F-string memudahkan format: <code>{x:.2f}</code> untuk 2 desimal dan <code>{x:,}</code> untuk pemisah ribuan.</p>`,
+e:`<pre>c = float(input("Celsius: "))\nf = c * 9 / 5 + 32\nprint(f"{c} C = {f:.1f} F")</pre>`,
+s:`<p><b>Kasir warung.</b> Program meminta nama pembeli, harga, dan jumlah, lalu mencetak total. Kesalahan umum: lupa <code>int()</code>, sehingga <code>"15000" * 3</code> menghasilkan teks <code>"150001500015000"</code>, bukan 45000.</p><p><b>Pelajaran:</b> selalu cek tipe data hasil <code>input()</code>.</p>`},
+{d:`<p>Percabangan memilih jalur eksekusi berdasarkan kondisi. Kondisi dievaluasi <b>dari atas ke bawah</b> dan berhenti pada yang pertama benar, sehingga urutan <code>elif</code> sangat berpengaruh: tuliskan syarat paling ketat lebih dulu. If bersarang (<i>nested</i>) dipakai bila keputusan bergantung pada keputusan sebelumnya.</p><p>Indentasi yang salah menyebabkan <code>IndentationError</code> atau perilaku yang tidak diinginkan.</p>`,
+e:`<pre>nilai = 78\nif nilai >= 85:\n    print("A")\nelif nilai >= 70:\n    print("B")\nelse:\n    print("C atau kurang")</pre><p>Jika <code>nilai &gt;= 70</code> ditulis lebih dulu, nilai 90 ikut tercetak "B". Itu contoh logic error.</p>`,
+s:`<p><b>Penentuan kelulusan.</b> Mahasiswa lulus bila nilai ≥ 70 <i>dan</i> kehadiran ≥ 75%. Bila nilai cukup tetapi kehadiran kurang, hasilnya "Tidak lulus (kehadiran)". Gunakan if bersarang atau <code>and</code>.</p><p><b>Pelajaran:</b> daftar semua kombinasi kondisi sebelum menulis kode.</p>`},
+{d:`<p><code>for</code> menelusuri setiap elemen suatu urutan. Pola penting: <b>akumulator</b> (<code>total = 0</code> lalu <code>total += n</code> di dalam perulangan) dan <b>penghitung</b>. Perulangan bersarang menghasilkan pola dua dimensi seperti tabel dan segitiga; putaran dalam selesai penuh untuk setiap satu putaran luar.</p>`,
+e:`<pre>for i in range(1, 11):\n    print(f"7 x {i} = {7 * i}")</pre>`,
+s:`<p><b>Rekap iuran warga.</b> Iuran dikumpulkan selama 5 bulan. Perulangan <code>for bulan in range(1, 6)</code> meminta nominal tiap bulan lalu menjumlahkannya ke <code>total</code>, dan di akhir mencetak total kas.</p><p><b>Pelajaran:</b> pekerjaan berulang dengan jumlah pasti paling tepat memakai <code>for</code>.</p>`},
+{d:`<p><code>while</code> dipakai bila jumlah pengulangan tidak diketahui di awal, misalnya "ulangi sampai input benar". Setiap <code>while</code> harus memiliki kondisi yang suatu saat berubah menjadi False; bila tidak, terjadi <i>infinite loop</i>. <code>break</code> menghentikan perulangan, <code>continue</code> melompat ke putaran berikutnya.</p>`,
+e:`<pre>percobaan = 0\nwhile percobaan < 3:\n    pin = input("PIN: ")\n    if pin == "1234":\n        print("Berhasil")\n        break\n    percobaan += 1</pre>`,
+s:`<p><b>Validasi PIN ATM.</b> Pengguna diberi maksimal 3 kali percobaan. Jika benar, <code>break</code>; jika 3 kali salah, kartu diblokir.</p><p><b>Pelajaran:</b> selalu sediakan batas atau jalan keluar dari perulangan agar program tidak menggantung.</p>`},
+{d:`<p>String adalah urutan karakter yang <b>tidak dapat diubah</b> (<i>immutable</i>): method seperti <code>upper()</code> menghasilkan string baru. Indeks negatif menghitung dari belakang (<code>teks[-1]</code> = karakter terakhir). Slicing <code>teks[a:b]</code> mengambil indeks a sampai b-1. Operator <code>in</code> memeriksa apakah suatu potongan ada di dalam teks.</p>`,
+e:`<pre>email = "  Budi@Gmail.com "\nbersih = email.strip().lower()\nprint(bersih)\nprint("@" in bersih)</pre>`,
+s:`<p><b>Pendaftaran online.</b> Data nama dan email dari formulir sering berantakan (spasi berlebih, huruf besar-kecil acak). Program menormalkan dengan <code>strip()</code> dan <code>lower()</code>, lalu memvalidasi email dengan <code>"@" in email</code>.</p><p><b>Pelajaran:</b> bersihkan data sebelum disimpan atau dibandingkan.</p>`},
+{d:`<p>List adalah kumpulan berurutan yang <b>dapat diubah</b> (<i>mutable</i>). Operasi umum: <code>append</code>, <code>insert</code>, <code>remove</code>, <code>pop</code>, <code>sort</code>. Slicing pada list bekerja seperti pada string. Menelusuri list dengan <code>for</code> lebih aman daripada mengakses indeks manual, yang dapat memicu <code>IndexError</code>.</p>`,
+e:`<pre>nilai = [80, 75, 90]\nnilai.append(60)\nprint(max(nilai), min(nilai))\nprint(sum(nilai) / len(nilai))</pre>`,
+s:`<p><b>Rekap nilai satu kelas.</b> Nilai 30 mahasiswa disimpan dalam list. Program menghitung rata-rata, nilai tertinggi, terendah, dan jumlah yang lulus memakai <code>for</code> dan <code>if</code>.</p><p><b>Pelajaran:</b> list + perulangan adalah dasar pengolahan data dalam jumlah banyak.</p>`},
+{d:`<p><b>Tuple</b> bersifat tetap sehingga cocok untuk data yang tidak boleh berubah, seperti koordinat <code>(lat, lon)</code>. <b>Dictionary</b> menyimpan pasangan kunci-nilai dengan pencarian cepat; kunci harus unik. Kumpulan banyak record biasanya berupa <i>list berisi dictionary</i>, mirip baris dan kolom pada tabel.</p>`,
+e:`<pre>stok = {"pulpen": 50, "buku": 30}\nstok["pulpen"] -= 5\nstok["penghapus"] = 20\nfor k in stok:\n    print(k, stok[k])</pre>`,
+s:`<p><b>Stok barang toko.</b> Dictionary menyimpan nama barang dan jumlah stok; setiap penjualan mengurangi stok. Data banyak mahasiswa disimpan sebagai list of dictionary, serupa dengan baris di Google Sheets.</p><p><b>Pelajaran:</b> pilih struktur data sesuai cara data dicari dan diubah.</p>`},
+{d:`<p>Fungsi menerapkan prinsip <b>DRY</b> (<i>Don't Repeat Yourself</i>). Parameter adalah variabel di definisi fungsi, argumen adalah nilai saat dipanggil. Bedakan <code>return</code> (mengembalikan nilai untuk dipakai lagi) dengan <code>print</code> (hanya menampilkan). Variabel di dalam fungsi bersifat <b>lokal</b> dan tidak terlihat dari luar.</p>`,
+e:`<pre>def mutu(nilai):\n    if nilai >= 85:\n        return "A"\n    elif nilai >= 70:\n        return "B"\n    return "C"\n\nprint(mutu(90), mutu(72))</pre>`,
+s:`<p><b>Hitung honor pengajar.</b> Rumus honor dipakai di banyak laporan. Dengan fungsi <code>hitung_honor(jam, tarif)</code>, perubahan rumus cukup dilakukan di satu tempat dan semua laporan ikut benar.</p><p><b>Pelajaran:</b> fungsi membuat program rapi, mudah diuji, dan mudah dirawat.</p>`},
+{d:`<p>Modul adalah file Python yang dapat diimpor. Pustaka standar menyediakan banyak modul siap pakai (<code>math</code>, <code>random</code>, <code>datetime</code>), sedangkan pustaka pihak ketiga dipasang dengan <code>pip install</code>. Bentuk <code>from math import sqrt</code> memanggil fungsi langsung tanpa awalan.</p>`,
+e:`<pre>import math, random\nr = 7\nprint(math.pi * r ** 2)\nprint(random.randint(1, 100))</pre>`,
+s:`<p><b>Undian doorprize.</b> Panitia menarik 3 nomor pemenang dari 1 sampai 200 memakai <code>random.randint</code>. Nomor yang sudah keluar disimpan dalam list agar tidak terpilih dua kali.</p><p><b>Pelajaran:</b> manfaatkan modul yang ada sebelum menulis sendiri dari nol.</p>`},
+{d:`<p>Blok <code>try/except</code> menangkap error tertentu agar program tidak berhenti mendadak. Tangkap jenis yang spesifik (<code>ValueError</code>, <code>ZeroDivisionError</code>, <code>FileNotFoundError</code>), bukan semuanya sekaligus. <code>finally</code> selalu dijalankan, dan <code>with open(...)</code> menutup file otomatis.</p>`,
+e:`<pre>try:\n    a = int(input("Angka: "))\n    print(10 / a)\nexcept ZeroDivisionError:\n    print("Tidak bisa dibagi nol")\nexcept ValueError:\n    print("Masukkan angka")</pre>`,
+s:`<p><b>Pencatat data sederhana.</b> Saat dibuka pertama kali, <code>data.txt</code> belum ada dan memicu <code>FileNotFoundError</code>. Program menangkapnya lalu membuat file baru, sehingga pengguna tidak melihat error.</p><p><b>Pelajaran:</b> antisipasi kegagalan yang wajar terjadi pada input dan file.</p>`},
+{d:`<p>Proyek dikerjakan bertahap: <b>(1) analisis kebutuhan, (2) rancangan IPO dan algoritma, (3) implementasi per fungsi, (4) pengujian</b> dengan data normal, data batas, dan data salah, <b>(5) dokumentasi</b> dan presentasi. Kerjakan dari versi paling sederhana yang berjalan, baru tambahkan fitur.</p>`,
+e:`<pre>def mutu(r):\n    return "A" if r >= 85 else "B" if r >= 70 else "C"\n\nnilai = [80, 65, 90]\nrata = sum(nilai) / len(nilai)\nprint(f"{rata:.2f} -> {mutu(rata)}")</pre>`,
+s:`<p><b>Aplikasi kasir sederhana.</b> Barang disimpan dalam dictionary harga; keranjang berupa list; perulangan <code>while</code> menerima input sampai pengguna mengetik "selesai"; fungsi menghitung total dan diskon; <code>try/except</code> menjaga input; struk dicetak dengan f-string.</p><p><b>Pelajaran:</b> proyek utuh adalah gabungan semua konsep pertemuan 1-13.</p>`}
+];
+const NAMA="Lazuardi Yudha Pradana, S.Kom.,M.Kom.";
+$("hd").textContent="Dosen pengampu: "+NAMA;
+function nav(a){$("nav").innerHTML='<b>🐍 Python</b><a href="#beranda" class="'+(a==0?'on':'')+'">Beranda</a>'+P.map((p,i)=>`<a href="#p${i+1}" class="${a==i+1?'on':''}">P${i+1}</a>`).join("")}
+function home(){nav(0);$("app").innerHTML=`<section class="hero"><span class="pill">Semester 1 · Teori & Praktikum</span><h1>Dasar Pemrograman dengan Python</h1><p>Belajar menulis program dari nol, 14 pertemuan, lengkap dengan simulator live coding di setiap materi.</p><a class="btn" href="#p1">Mulai Pertemuan 1</a><a class="btn g" href="#dosen">Dosen pengampu</a></section>
+<h2>Deskripsi Mata Kuliah</h2><div class="card">Mata kuliah ini memperkenalkan cara berpikir logis dan komputasional lewat bahasa Python. Mahasiswa mempelajari variabel, operator, percabangan, perulangan, struktur data, fungsi, modul, dan penanganan error. Setiap pertemuan berisi teori singkat, contoh kode, simulasi live coding, dan tugas praktikum.</div>
+<h2>Tujuan Mata Kuliah</h2><div class="card"><ul><li>Memahami konsep dasar algoritma dan alur logika program.</li><li>Menguasai sintaks dasar Python untuk menulis program sederhana.</li><li>Melatih kemampuan memecahkan masalah secara terstruktur.</li><li>Membiasakan menguji dan memperbaiki program (debugging).</li></ul></div>
+<h2>Capaian Pembelajaran</h2><div class="card"><p>Setelah mengikuti mata kuliah ini, mahasiswa mampu:</p><ul><li>Menjelaskan konsep algoritma dan menyusunnya menjadi langkah yang runtut.</li><li>Menulis program Python dengan variabel, operator, input, dan output.</li><li>Menerapkan percabangan dan perulangan untuk menyelesaikan masalah.</li><li>Mengolah data memakai string, list, tuple, dan dictionary.</li><li>Menyusun program modular dengan fungsi dan modul.</li><li>Membuat mini proyek Python secara mandiri.</li></ul></div>
+<h2 id="dosen">Sekilas Mengenai Dosen Pengampu</h2><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))"><div class="card cont"><h3>${NAMA}</h3><p><i>“Seorang muslim yang memiliki cita dunia untuk menjadi pengajar ilmu dan pemilik cinta dari keluarga. Tumbuh sejak 1994, pendamping setia sejak 2018, serta dosen & ayah penjaga cinta sejak 2019.”</i></p><p>📷 Instagram: <a href="https://instagram.com/lazuardiyudha" target="_blank" rel="noopener">Lazuardiyudha</a><br>💬 WhatsApp: <a href="https://wa.me/6281377922669" target="_blank" rel="noopener">0813-7792-2669</a><br>🎮 Mobile Legends ID: 899085688 (12552)</p></div>
+<div class="card"><h3>🎓 Riwayat Pengajaran</h3><div class="tl"><p><small>2019 – Sekarang</small>Dosen Universitas Dinamika Bangsa</p><p><small>2020 – Sekarang</small>Instruktur Stephen Komputer</p><p><small>2021 – Sekarang</small>Dosen Universitas Adiwangsa Jambi</p><p><small>2022 – 2025</small>Dosen UIN STS & Poltekkes Kemenkes Jambi</p></div></div></div>
+<h2>Peta Pertemuan</h2><div class="grid">${P.map((p,i)=>`<a href="#p${i+1}"><small>Pertemuan ${i+1}</small><br><b>${p.t}</b></a>`).join("")}</div>`}
+let tm;
+function meet(n){nav(n);const p=P[n-1];$("app").innerHTML=`<span class="pill">Pertemuan ${n} dari 14</span><h1>${p.t}</h1><div class="card"><b>Tujuan:</b> ${p.g}</div>
+<h2>Ringkasan Teori</h2><div class="card">${p.th}</div>
+<h2>Penjelasan Teoritis Lengkap</h2><div class="card">${X[n-1].d}</div>
+<h2>Contoh</h2><div class="card">${X[n-1].e}</div>
+<h2>Studi Kasus</h2><div class="card cs">${X[n-1].s}</div>
+<h2>Live Coding</h2><div class="card"><div class="bar"><button class="btn" id="r">▶ Jalankan</button><button class="btn g" id="a">⌨ Ketik otomatis</button><button class="btn g" id="x">↺ Reset</button></div>
+<div class="lb">Editor Python (boleh diubah, tombol Tab = 4 spasi)</div><textarea id="ed" spellcheck="false"></textarea><div class="lb">Input (satu nilai per baris)</div><textarea id="sin" rows="2" spellcheck="false"></textarea><div class="lb">Output</div><pre id="out"></pre>
+<div class="lb">Simulator mini mendukung dasar-dasar Python. Hasil float bulat tampil tanpa “.0”.</div></div>
+<h2>Tugas Praktikum</h2><div class="card"><ol>${p.k.split("|").map(x=>`<li>${x}</li>`).join("")}</ol></div>
+<div class="nv">${n>1?`<a class="btn g" style="color:var(--a)" href="#p${n-1}">← Pertemuan ${n-1}</a>`:`<span></span>`}${n<14?`<a class="btn" href="#p${n+1}">Pertemuan ${n+1} →</a>`:`<a class="btn" href="#beranda">Kembali ke beranda</a>`}</div>`;
+const ed=$("ed");ed.value=p.c;$("sin").value=p.i;$("r").onclick=run;
+$("x").onclick=()=>{clearInterval(tm);ed.value=p.c;$("sin").value=p.i;$("out").textContent=""};
+$("a").onclick=()=>{clearInterval(tm);$("out").textContent="";let i=0;tm=setInterval(()=>{ed.value=p.c.slice(0,++i);ed.scrollTop=1e5;if(i>=p.c.length){clearInterval(tm);run()}},22)};
+ed.onkeydown=e=>{if(e.key=="Tab"){e.preventDefault();const s=ed.selectionStart;ed.setRangeText("    ",s,ed.selectionEnd,"end")}};run()}
+function tr(src){
+ const S=[];
+ const cv=e=>{
+  e=e.replace(/\bf(["'])((?:(?!\1).)*)\1/g,(m,q,b)=>S.push("`"+b.replace(/\{([^}:]*)(?::([^}]*))?\}/g,(x,y,s)=>"${"+(s?"__f("+cv(y)+',"'+s+'")':cv(y))+"}")+"`")&&"§"+(S.length-1)+"§");
+  e=e.replace(/(["'])(?:\\.|(?!\1).)*\1/g,m=>"§"+(S.push(m)-1)+"§").replace(/#.*$/,"")
+   .replace(/,\s*(sep|end)\s*=\s*(§\d+§)/g,',{__kw:"$1",v:$2}')
+   .replace(/(§\d+§)\s*\*\s*(\d+)/g,"$1.repeat($2)")
+   .replace(/(\w+|§\d+§)\s+not in\s+(\w+)/g,"!__in($1,$2)")
+   .replace(/(\w+|§\d+§)\s+in\s+(\w+)/g,"__in($1,$2)")
+   .replace(/\bnot\b/g,"!").replace(/\band\b/g,"&&").replace(/\bor\b/g,"||")
+   .replace(/\bTrue\b/g,"true").replace(/\bFalse\b/g,"false").replace(/\bNone\b/g,"null")
+   .replace(/(\w+(?:\.\w+)*)\s*\/\/\s*(\w+(?:\.\w+)*)/g,"Math.floor($1/$2)")
+   .replace(/\[(-?\d*):(-?\d*)\]/g,(m,a,b)=>".slice("+(a||0)+(b?","+b:"")+")")
+   .replace(/\.(append|upper|lower|strip|replace|startswith|find)\(/g,(m,k)=>"."+{append:"push",upper:"toUpperCase",lower:"toLowerCase",strip:"trim",replace:"replaceAll",startswith:"startsWith",find:"indexOf"}[k]+"(");
+  return e.replace(/§(\d+)§/g,(m,i)=>S[i])};
+ const out=[],st=[],names=new Set();let m;
+ for(const raw of src.replace(/\t/g,"    ").split("\n")){
+  const t=raw.trim();if(!t||t[0]=="#")continue;
+  const n=raw.search(/\S/);
+  while(st.length&&n<=st[st.length-1]){st.pop();out.push("}")}
+  if(m=t.match(/^([A-Za-z_]\w*)\s*[-+*\/%]?=(?!=)/))names.add(m[1]);
+  if(m=t.match(/^(if|elif|while)\s+(.*):$/)){out.push((m[1]=="if"?"if(":m[1]=="elif"?"else if(":"while(")+cv(m[2])+"){"+(m[1]=="while"?"__g();":""));st.push(n)}
+  else if(t=="else:"){out.push("else{");st.push(n)}
+  else if(t=="try:"){out.push("try{");st.push(n)}
+  else if(m=t.match(/^except\b.*?(?:\bas\s+(\w+))?:$/)){out.push("catch("+(m[1]||"__e")+"){");st.push(n)}
+  else if(m=t.match(/^for\s+(\w+)\s+in\s+(.*):$/)){out.push("for(let "+m[1]+" of __it("+cv(m[2])+")){");st.push(n)}
+  else if(m=t.match(/^def\s+(\w+)\((.*)\):$/)){out.push("function "+m[1]+"("+cv(m[2])+"){");st.push(n)}
+  else if(/^(import|from|pass)\b/.test(t)){}
+  else out.push(cv(t)+";")}
+ while(st.pop()!==undefined)out.push("}");
+ return (names.size?"var "+[...names].join(",")+";\n":"")+out.join("\n")}
+function run(){
+ const o=[],inp=$("sin").value.split("\n");let q=0,g=0;
+ const fmt=x=>x===true?"True":x===false?"False":x==null?"None":x instanceof Error?x.message:Array.isArray(x)?"["+x.map(r).join(", ")+"]":typeof x=="object"?"{"+Object.entries(x).map(([k,v])=>r(k)+": "+r(v)).join(", ")+"}":String(x);
+ const r=x=>typeof x=="string"?"'"+x+"'":fmt(x);
+ const num=(x,w)=>{const v=Number(x);if(x===""||isNaN(v))throw new Error("ValueError: "+w);return v};
+ const H={
+  print:(...a)=>{let sep=" ",end="\n",k;while(a.length&&(k=a[a.length-1])&&k.__kw){a.pop();k.__kw=="sep"?sep=k.v:end=k.v}o.push(a.map(fmt).join(sep)+end)},
+  input:p=>{const v=inp[q++]??"";o.push((p||"")+v+"\n");return v},
+  int:x=>Math.trunc(num(x,"invalid literal for int() with base 10")),float:x=>num(x,"could not convert string to float"),str:String,
+  len:x=>x.length??Object.keys(x).length,abs:Math.abs,round:(x,n=0)=>+(+x).toFixed(n),
+  range:(a,b,c=1)=>{if(b===undefined){b=a;a=0}const l=[];for(let i=a;c>0?i<b:i>b;i+=c)l.push(i);return l},
+  max:(...a)=>Math.max(...(a.length==1?a[0]:a)),min:(...a)=>Math.min(...(a.length==1?a[0]:a)),sum:a=>a.reduce((x,y)=>x+y,0),
+  math:{sqrt:Math.sqrt,pi:Math.PI,floor:Math.floor,ceil:Math.ceil,pow:Math.pow},
+  random:{randint:(a,b)=>a+Math.floor(Math.random()*(b-a+1))},
+  __g:()=>{if(++g>2e5)throw new Error("Perulangan tanpa henti dihentikan")},
+  __it:x=>typeof x=="object"&&!Array.isArray(x)?Object.keys(x):x,
+  __in:(a,b)=>typeof b=="object"&&!Array.isArray(b)?a in b:b.includes(a),
+  __f:(v,s)=>{const m=s.match(/\.(\d+)f/),f={};if(m)f.minimumFractionDigits=f.maximumFractionDigits=+m[1];return s.includes(",")?Number(v).toLocaleString("en-US",f):m?Number(v).toFixed(+m[1]):v}};
+ let err="";
+ try{new Function("H","with(H){"+tr($("ed").value)+"\n}")(H)}catch(e){err=e.name=="SyntaxError"?"SyntaxError: sintaks belum dikenali simulator ("+e.message+")":e.message}
+ $("out").innerHTML="";$("out").append(o.join(""));
+ if(err){const s=document.createElement("span");s.className="err";s.textContent="⚠ "+err;$("out").append(s)}}
+function route(){const h=location.hash.slice(1),m=h.match(/^p(\d+)$/);clearInterval(tm);
+ if(m&&P[m[1]-1]){meet(+m[1]);scrollTo(0,0)}else{home();if(h=="dosen")$("dosen")?.scrollIntoView()}}
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
